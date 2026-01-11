@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRUMPWHALE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(0,0,80,0.95) 0%, rgba(0,0,80,0) 100%);
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .header-logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        
+        .header-logo span {
+            font-weight: 900;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .header-socials {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .header-socials a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .header-socials a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+        
+        .header-socials svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+        
+        .header-socials .dex-icon {
+            width: 24px;
+            height: 24px;
+            filter: invert(1);
+        }
+        
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            z-index: 1;
+            padding: 20px;
+        }
+        
+        .main-title {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+            color: white;
+        }
+        
+        .tagline {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #0044FF 0%, #0088FF 100%);
+            color: white;
+            border: 3px solid rgba(255,255,255,0.5);
+            padding: 15px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            background: linear-gradient(135deg, #0066FF 0%, #00AAFF 100%);
+            border-color: white;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,100,255,0.4);
+        }
+        
+        .hero-link {
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-link:hover {
+            transform: scale(1.05);
+        }
+        
+        .baseapp-logo {
+            height: 60px;
+            border-radius: 10px;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-15px); }
+            60% { transform: translateX(-50%) translateY(-7px); }
+        }
+        
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-1 {
+            background: linear-gradient(135deg, #000066 0%, #003399 30%, #0055AA 60%, #003377 100%);
+        }
+        
+        .section-1::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 150%;
+            background: radial-gradient(ellipse, rgba(0,100,255,0.3) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        .section-2 {
+            background: linear-gradient(180deg, #001144 0%, #002266 30%, #001155 60%, #000033 100%);
+        }
+        
+        .section-2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0,80,200,0.3) 0%, transparent 30%),
+                radial-gradient(circle at 80% 20%, rgba(0,100,255,0.2) 0%, transparent 40%);
+        }
+        
+        .section-3 {
+            background: linear-gradient(135deg, #002255 0%, #0044AA 30%, #0066CC 50%, #003388 80%, #001155 100%);
+        }
+        
+        .section-3::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at center, rgba(0,150,255,0.2) 0%, transparent 50%);
+        }
+        
+        .section-final {
+            background: linear-gradient(180deg, #000033 0%, #001166 30%, #002288 50%, #001155 80%, #000022 100%);
+            position: relative;
+        }
+        
+        .section-final::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(0,100,200,0.4) 0%, transparent 40%),
+                radial-gradient(circle at 70% 30%, rgba(0,50,150,0.3) 0%, transparent 50%);
+        }
+        
+        .banner-image {
+            width: 100%;
+            max-width: 900px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            max-width: 800px;
+            margin-bottom: 60px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .image-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .image-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,100,255,0.3);
+        }
+        
+        .image-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .image-card-content {
+            padding: 20px;
+        }
+        
+        .image-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .image-card p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        .about-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .about-image {
+            width: 400px;
+            max-width: 90%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+        
+        .about-text {
+            max-width: 500px;
+            text-align: left;
+        }
+        
+        .about-text h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .footer {
+            background: linear-gradient(180deg, #000022 0%, #000011 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer p {
+            opacity: 0.7;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(0,100,255,0.3) 0%, rgba(0,50,150,0.3) 100%);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: linear-gradient(135deg, rgba(0,150,255,0.5) 0%, rgba(0,100,200,0.5) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,100,255,0.3);
+        }
+        
+        .social-links svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+        
+        .social-links .dex-icon {
+            width: 28px;
+            height: 28px;
+            filter: invert(1);
+        }
+        
+        @media (max-width: 768px) {
+            .about-text {
+                text-align: center;
+            }
+            
+            header {
+                padding: 10px 15px;
+            }
+            
+            .header-logo span {
+                font-size: 1rem;
+            }
+            
+            .header-socials a {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-logo">
+            <img src="images/logo.png" alt="TRUMPWHALE Logo">
+            <span>TRUMPWHALE</span>
+        </div>
+        <div class="header-socials">
+            <a href="https://dexscreener.com/base/0x03fcf95af0d6f8b0c78929a1b14ed1db422c83828baef7ab9c56b517d32d57bf" target="_blank" title="Dexscreener">
+                <img src="images/dexscreener.png" alt="Dexscreener" class="dex-icon">
+            </a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <video autoplay muted loop playsinline class="video-background">
+            <source src="video.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+        
+        <div class="hero-content">
+            <h1 class="main-title">TRUMPWHALE</h1>
+            <p class="tagline">The biggest wave in the ocean. Join the movement and ride the future together.</p>
+          
+        </div>
+        
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24">
+                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+            </svg>
+        </div>
+    </section>
+    
+    <section class="section section-1">
+        <h2 class="section-title">About The Whale</h2>
+        <p class="section-subtitle">TRUMPWHALE is more than just a symbol - it's a movement. Strong, powerful, and unstoppable. We're here to make waves in the community.</p>
+        
+        <div class="about-section">
+            <img src="images/whale2.png" alt="TRUMPWHALE" class="about-image">
+            <div class="about-text">
+                <h2>Making TRUMPWHALE Again</h2>
+                <p>With determination and strength, TRUMPWHALE leads the way. Our community stands united, ready to conquer new heights and set new standards.</p>
+                <p>Join thousands of supporters who believe in the power of the whale. Together, we are unstoppable.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section section-2">
+        <h2 class="section-title">The Whale Family</h2>
+        <p class="section-subtitle">Meet the different sides of TRUMPWHALE. From warrior to explorer, we embrace all forms of greatness.</p>
+        
+        <div class="image-grid">
+            <div class="image-card">
+                <img src="images/whale1.png" alt="Warrior Whale">
+                <div class="image-card-content">
+                    <h3>The Warrior</h3>
+                    <p>Armed and ready to defend our community. Strength and honor above all.</p>
+                </div>
+            </div>
+            <div class="image-card">
+                <img src="images/whale2.png" alt="President Whale">
+                <div class="image-card-content">
+                    <h3>The President</h3>
+                    <p>Leading with vision and purpose. Making decisions that matter.</p>
+                </div>
+            </div>
+            <div class="image-card">
+                <img src="images/whale3.png" alt="Explorer Whale">
+                <div class="image-card-content">
+                    <h3>The Explorer</h3>
+                    <p>Reaching for the stars. No frontier is too far for our dreams.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section section-3">
+        <h2 class="section-title">Join The Movement</h2>
+        <p class="section-subtitle">Be part of something bigger. The TRUMPWHALE community is growing every day. Don't miss your chance to be part of history.</p>
+        
+        <a href="https://dexscreener.com/base/0x03fcf95af0d6f8b0c78929a1b14ed1db422c83828baef7ab9c56b517d32d57bf" target="_blank" class="cta-button">Get Started</a>
+    </section>
+    
+    <section class="section section-final">
+        <img src="images/banner.jpg" alt="TRUMPWHALE Banner" class="banner-image">
+        <h2 class="section-title">The Future Is Now</h2>
+        <p class="section-subtitle">TRUMPWHALE is rising. Be part of the revolution. Together we make waves that will change the world.</p>
+        <button class="cta-button">Join The Whale</button>
+    </section>
+    
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://dexscreener.com/base/0x03fcf95af0d6f8b0c78929a1b14ed1db422c83828baef7ab9c56b517d32d57bf" target="_blank" title="Dexscreener">
+                <img src="images/dexscreener.png" alt="Dexscreener" class="dex-icon">
+            </a>
+        </div>
+        <p>TRUMPWHALE &copy; 2026 | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
